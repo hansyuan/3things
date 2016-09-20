@@ -6,9 +6,15 @@ import android.os.Bundle;
 import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
-//TODO figure out how to keep track of how many posts i did today
+
+    // TODO figure out how to keep track of how many posts i did today
+    // TODO How do I use the notification system to display the graphs?
 
 
+    /**
+     * Loads the main screen
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -31,6 +31,7 @@ public class WriteThing extends AppCompatActivity {
         // Get unique filename.
         Calendar cal = Calendar.getInstance();
         String year, month, day, hour, minute, second;
+
         year = Integer.toString(cal.get(cal.YEAR));
         month = Integer.toString(cal.get(cal.MONTH)+1);
         day = Integer.toString(cal.get(cal.DAY_OF_MONTH));
