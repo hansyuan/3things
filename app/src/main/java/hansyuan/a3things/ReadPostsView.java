@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
 
@@ -44,14 +45,17 @@ public class ReadPostsView extends AppCompatActivity {
 
             // Open the table of contents.
             //inFile = openFileInput(tableContents);
-            FileReader fr = new FileReader(tableContents);
+            FileReader fr = new FileReader(new File( this.getFilesDir(), tableContents) );
             BufferedReader br = new BufferedReader(fr);
 
             // Read as many as possible (probably want to change to BR)
             while (true) {
                 String s = br.readLine();
                 if(s != null){
-                    ret += s;
+                    ret += s+"\n";
+                }
+                else {
+                    break;
                 }
             }
         } catch (Exception e) {
