@@ -1,11 +1,18 @@
 package hansyuan.a3things;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileReader;
 
 /**
  * Displays, in order of most recent, the list of posts.
@@ -23,16 +30,41 @@ public class ReadPostsView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_read_posts_view);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+        TextView words = (TextView)findViewById(R.id.words);
+        words.setText( readTableOfContents() );
+    }
+
+    public String readTableOfContents() {
+        String tableContents = "00_TableOfContents.txt";
+        FileInputStream inFile;
+        String ret = "";
+
+        try {
+
+            // Open the table of contents.
+            //inFile = openFileInput(tableContents);
+            FileReader fr = new FileReader(tableContents);
+            BufferedReader br = new BufferedReader(fr);
+
+            // Read as many as possible (probably want to change to BR)
+            while (true) {
+                String s = br.readLine();
+                if(s != null){
+                    ret += s;
+                }
             }
-        });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        Context context = getApplicationContext();
+        CharSequence text = ret;
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+        return ret;
+
     }
 }

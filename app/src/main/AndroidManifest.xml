@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="hansyuan.a3things">
-    // Asking Android for permission to write to storage.
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
@@ -24,5 +24,6 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".DataAndStates"></activity>
     </application>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
 </manifest>

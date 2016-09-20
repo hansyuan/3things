@@ -22,8 +22,31 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // New method that calls new activity for the WriteThing
-    public void startWrite(View view){
-        Intent i = new Intent(this,WriteThing.class);
+
+    /**
+     * Calls writeThing
+     * @param view
+     */
+    public void startWrite(View view) {
+        Intent i = new Intent(this, WriteThing.class);
+        startActivity(i);
+    }
+
+    /**
+     * Opens the activity that displays the prev posts.
+     * @param view
+     */
+    public void readPreviousPosts(View view) {
+        Intent i = new Intent(this, ReadPostsView.class);
+        startActivity(i);
+    }
+
+    /**
+     * Opens activity to display stats and data.
+     * @param view
+     */
+    public void dataStats(View view) {
+        Intent i = new Intent(this, DataAndStates.class);
         startActivity(i);
     }
 }
