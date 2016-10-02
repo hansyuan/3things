@@ -8,9 +8,22 @@
     android:fitsSystemWindows="true"
     tools:context="hansyuan.a3things.ReadPostsView">
 
-    <TextView
-        android:text="TextView"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="489dp"
-        android:id="@+id/words" />
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/linearLayout" >
+
+            <TextView
+                android:text="List of posts:"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView3" />
+        </LinearLayout>
+    </ScrollView>
 </android.support.design.widget.CoordinatorLayout>

@@ -16,22 +16,30 @@
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
         android:ems="10"
-        android:layout_alignParentTop="true"
+        android:id="@+id/textPost"
+        android:selectAllOnFocus="false"
+        android:layout_below="@+id/textView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/textPost"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:selectAllOnFocus="false" />
+        android:layout_alignParentEnd="true" />
 
     <Button
         android:text="Save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/save"
+        android:onClick="savePost"
         android:layout_below="@+id/textPost"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:onClick="savePost" />
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:text="Write a positive thing. It can be as long as you want."
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

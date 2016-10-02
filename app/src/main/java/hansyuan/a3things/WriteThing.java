@@ -25,12 +25,11 @@ public class WriteThing extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write_thing);
     }
-    /*
-    This method will initiate saving the post into the phone.
-    To keep each file unique, it should be in the format:
-    YEAR_MONTH_DAY_POSTNUM
-     */
 
+    /**
+     * Automatically initiate a toast based on the string parameter
+     * @param toToast the string you display in a toast
+     */
     public void toasting(String toToast){
         Context context = getApplicationContext();
         CharSequence text = toToast;
@@ -38,22 +37,47 @@ public class WriteThing extends AppCompatActivity {
 
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
-
     }
 
+
+    /**
+     * Initiate saving the post to the phone.
+     * Keeping each file unique with the format:
+     * YEAR_MONTH_DAY_POSTNUM
+     * @return String name to be the file name, always unique
+     */
     public String getFileName(){
         Calendar cal = Calendar.getInstance();
         String year, month, day, hour, minute, second;
+        int tempMonth, tempDay, tempHour, tempMinute, tempSecond;
 
         year = Integer.toString(cal.get(cal.YEAR));
-        month = Integer.toString(cal.get(cal.MONTH)+1);
-        day = Integer.toString(cal.get(cal.DAY_OF_MONTH));
-        hour = Integer.toString(cal.get(cal.HOUR_OF_DAY));
-        minute = Integer.toString(cal.get(cal.MINUTE));
-        second = Integer.toString(cal.get(cal.SECOND));
 
-        return new String(
-                year+"_0"+month+"_"+day+"_"+hour+"_"+minute+"_"+second+".txt");
+        tempMonth = cal.get(cal.MONTH) + 1;
+        month = Integer.toString(tempMonth);
+        if (tempMonth < 10) month = "0" + month;
+
+        tempDay = cal.get(cal.DAY_OF_MONTH);
+        day = Integer.toString(tempDay);
+        if (tempDay < 10) day = "0" + day;
+
+        tempHour = cal.get(cal.HOUR_OF_DAY);
+        hour = Integer.toString(tempHour);
+        if (tempHour < 10) hour = "0" + hour;
+
+        tempMinute = cal.get(cal.MINUTE);
+        minute = Integer.toString( tempMinute );
+        if (tempMinute < 10) minute = "0"+ minute;
+
+        tempSecond = cal.get(cal.SECOND);
+        second = Integer.toString(tempSecond);
+        if (tempSecond < 10) second = "0"+ second;
+
+
+
+
+        return (year + "_" + month + "_" + day + "_" + hour
+                + "_" + minute + "_" + second + ".txt");
 
     }
 
@@ -63,38 +87,42 @@ public class WriteThing extends AppCompatActivity {
      * Should also update the overall table of contents
      */
     public void savePost(View view){
-        toasting("This ran.");
-        // Get unique filename.
+        /** Set to true for toast statements */
+        Boolean debug = false;
+
+        if (debug) toasting("This ran.");
+
+        /** Get unique filename. */
         String fileName = getFileName();
 
 
-        // Grab the text from the editview and then save into phone as string.
+        /** Grab the text from the editview and then save into phone as string. */
         EditText textRef = (EditText) findViewById(R.id.textPost);
         String getString = textRef.getText().toString();
-        String tableContents = "00_TableOfContents.txt";
 
+        String tableContents = "00_TableOfContents.txt";
         File tableContentsFile = new File(this.getFilesDir(), tableContents);
 
         File fileNameFile = new File( this.getFilesDir(), fileName );
         FileOutputStream fos;
 
-        // Write the post.try
+        /** Write the post.try */
 
         try {
-            toasting ("Before FW");
+            if (debug) toasting ("Before FW");
             fos = openFileOutput(fileName, Context.MODE_PRIVATE);
-            toasting ("Before println");
+            if (debug) toasting ("Before println");
             fos.write(getString.getBytes());
-            toasting("after println");
+            if (debug) toasting("after println");
             fos.close();
-            toasting("Success");
+            if (debug) toasting("Success");
 
         }
         catch (Exception e) {
             e.printStackTrace();
         }
 
-        toasting(getString);
+        if (debug) toasting(getString);
 
         // Record the time and date into the table of contents.
         try
@@ -104,19 +132,23 @@ public class WriteThing extends AppCompatActivity {
             PrintWriter out = new PrintWriter(bw);
             out.println(fileName);
             out.close();
-            toasting ("Well, this worked.");
+
+            if(debug) toasting ("Well, this worked.");
 
         }
         catch (Exception e) {
             e.printStackTrace();
         }
 
-        toasting(fileName);
 
 
+        /** Reads all available files. */
+        if (debug)  toasting(fileName);
+
+        /*
         try {
-
             toasting("Initate reading");
+
             // Open the table of contents.
             //inFile = openFileInput(tableContents);
             FileReader fr = new FileReader(new File(this.getFilesDir(), tableContents));
@@ -133,7 +165,6 @@ public class WriteThing extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
+        */
     }
 }
