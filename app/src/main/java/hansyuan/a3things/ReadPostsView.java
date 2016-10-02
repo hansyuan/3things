@@ -27,6 +27,7 @@ import java.util.ArrayList;
 
 public class ReadPostsView extends AppCompatActivity {
     private final String tableContents = "00_TableOfContents.txt";
+    private ArrayList<Button> listButtons = new ArrayList<>();
 
     /**
      * The very nice default scrolling activity code that I need to learn.
@@ -105,43 +106,62 @@ public class ReadPostsView extends AppCompatActivity {
     {
         /** Iterate through each file in the table of contents
          * and pass file name to next method. */
-
-
-            /** Read as many as possible (probably want to change to BR) */
-            for (String currFile: all)
-            {
-                toasting( currFile );
-                createButton (currFile);
-            }
-    }
-
-    /**
-     * Creates a button for each file that exists.
-     */
-    protected void createButton(String filename)
-    {
-        /**
-         * From the following website
-         * http://stackoverflow.com/questions/14920535/how-to-add-more-than-one-button-to-scrollview-in-android
-         */
-
-        // Find the ScrollView
-        ScrollView scrollView = (ScrollView) findViewById(R.id.scrollView1);
-
-
-        // Create a LinearLayout element
         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.linearLayout);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
 
-        // Add Buttons
-        toasting ("new button");
-        Button button = new Button(this);
-        button.setText(filename);
-        //button.setId(5);                             //TODO
-        linearLayout.addView(button);
+            /** Read as many as possible (probably want to change to BR) */
+            for ( String curr: all)
+            {
+                final String currFile = curr;
+                Button button = new Button(this);
+                button.setText(currFile);
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        displayFile(currFile);
+                    }
+                });
+                linearLayout.addView(button);
+                listButtons.add(button);
+            }
+    }
 
-        /** End copy pasted code */
-        return;
+
+    /**
+     *
+     * @param view
+     */
+    protected void displayFile(String filename)
+    {
+        String content = "";
+        try {
+
+            // Open the table of contents.
+            //inFile = openFileInput(tableContents);
+            FileReader fr = new FileReader(
+                    new File( this.getFilesDir(), filename) );
+            BufferedReader br = new BufferedReader(fr);
+
+            // Read as many as possible (probably want to change to BR)
+            while (true) {
+                String currLine = br.readLine();
+
+                if(currLine != null)
+                {
+                    content += currLine + "\n";
+                }
+
+                else
+                {
+                    break;
+                }
+            }
+
+
+        } catch (Exception e) { e.printStackTrace(); }
+
+        toasting(content);
+
     }
 
 
