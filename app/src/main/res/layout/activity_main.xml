@@ -9,8 +9,47 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="hansyuan.a3things.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <Button
+        android:text="Enter a positive thing."
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:id="@+id/button2"
+        android:onClick="startWrite"
+        android:layout_marginTop="16dp"
+        android:layout_below="@+id/textView2"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:text="Read Previous Posts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button2"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="16dp"
+        android:id="@+id/button3"
+        android:onClick="readPreviousPosts" />
+
+    <Button
+        android:text="Data/Stats"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button3"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="16dp"
+        android:id="@+id/button4"
+        android:onClick="dataStats" />
+
+    <TextView
+        android:text="Number of Posts Today: [0/3]"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView2"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
 </RelativeLayout>
